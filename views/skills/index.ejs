@@ -1,43 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Express Dev Skills</title>
-</head>
-<body>
-  <a href="/">Home</a>
-  <a href="/skills">Level Reached</a>
-  <div>
-      <h1>Novice</h1>
-      <ul>
-        <% noviceSkills.forEach(function(s) { %>
-          <li>
-            <a href="/skills/<%= s.id %>"><%= s.skill %></a>
-          </li>
-        <% }); %>
-      </ul>
-  </div>
-  <div>
-    <h1>Competent</h1>
-    <ul>
+<%- include('../partials/header') %>
+<h1>Skills as of <%= time %></h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Level</th>
+    </tr>
+  </thead>
+  <tbody class="table-primary">
+    <% noviceSkills.forEach(function(s) { %>
+      <tr>
+        <td><a href="/skills/<%= s.id %>"><%= s.skill %></a></td>
+        <td><%= s.level %></td>
+        <td>
+          <form action="/skills/<%= s.id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger">X</button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+    <tbody class="table-success">
       <% competentSkills.forEach(function(s) { %>
-        <li>
-          <a href="/skills/<%= s.id %>"><%= s.skill %></a>
-        </li>
-      <% }); %>
-    </ul>
-    </div>
-    <div>
-    <h1>Proficient</h1>
-    <ul>
-      <% proficientSkills.forEach(function(s) { %>
-        <li>
-          <a href="/skills/<%= s.id %>"><%= s.skill %></a>
-        </li>
-      <% }); %>
-    </ul>
-    </div>
-</body>
-</html>
+        <tr>
+          <td><a href="/skills/<%= s.id %>"><%= s.skill %></a></td>
+          <td><%= s.level %></td>
+          <td>
+            <form action="/skills/<%= s.id %>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger">X</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+      <tbody class="table-danger">
+        <% proficientSkills.forEach(function(s) { %>
+          <tr>
+            <td><a href="/skills/<%= s.id %>"><%= s.skill %></a></td>
+            <td><%= s.level %></td>
+            <td>
+              <form action="/skills/<%= s.id %>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-danger">X</button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+<%- include('../partials/footer') %>
